@@ -1,5 +1,5 @@
 // DEVELOPMENT ENVIRONMENT VARIABLES
 module.exports = {
-  mongoURI: 'mongodb://localhost/<projectName>', // Make sure to rename <projectName>
+  mongoURI: 'mongodb://localhost/project_name', // Make sure to rename project_name
   port: 8080
 };
