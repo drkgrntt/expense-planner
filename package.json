@@ -1,7 +1,7 @@
 {
-  "name": "merrn-simple-starter",
+  "name": "receipts",
   "version": "1.0.0",
-  "description": "A starting point for any apps made with MongoDB, Express, React, Redux, and Node, to be deployed on Heroku.",
+  "description": "A simple app for consuming receipts and itemizing them for a weekly expense report.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

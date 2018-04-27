@@ -8,7 +8,7 @@ import Landing from './Landing';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <BrowserRouter>
           <div>
             <Route exact path="/" component={Landing} />
