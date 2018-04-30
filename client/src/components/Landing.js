@@ -73,7 +73,7 @@ class Landing extends Component {
   // HANDLE FINALIZE BUTTON CLICK
   onFinalizeClick() {
     const { createCollection, receipts } = this.props;
-    const confirm = window.confirm("Are you sure you're ready to finalize these receipts?");
+    const confirm = window.confirm("Are you sure you're ready to finalize these receipts? (This will be a permanent save.)");
 
     if (confirm) {
       createCollection(receipts);

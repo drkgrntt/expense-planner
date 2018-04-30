@@ -19,31 +19,6 @@ import {
   SUBMIT_ITEM_FAIL
 } from './types';
 
-// ============================
-//      COLLECTION ACTIONS
-// ============================
-
-// CREATE A NEW COLLECTION
-export const createCollection = receipts => async dispatch => {
-  let info = {
-    total: 0,
-    receipts: receipts,
-    dateRange: ''
-  };
-
-  // add collection total
-  _.map(receipts, receipt => {
-    info.total = info.total + receipt.total;
-  });
-
-  // concatonate readable date range
-  info.dateRange = `From ${receipts[receipts.length - 1].dateString} to ${receipts[0].dateString}`;
-
-  const res = await axios.post('/api/collections', info);
-
-  dispatch({ type: CREATE_COLLECTION, payload: res.data });
-};
-
 // FETCH ALL COLLECTIONS
 export const fetchCollections = () => async dispatch => {
   const res = await axios.get('/api/collections');
@@ -164,4 +139,31 @@ export const deleteItem = (items, id) => dispatch => {
 // FORM VALIDATION
 export const submitItemFail = () => dispatch => {
   dispatch({ type: SUBMIT_ITEM_FAIL });
+};
+
+// ============================
+//      COLLECTION ACTIONS
+// ============================
+
+// CREATE A NEW COLLECTION
+export const createCollection = receipts => async dispatch => {
+  let info = {
+    total: 0,
+    receipts: receipts,
+    dateRange: ''
+  };
+
+  // add collection total
+  _.map(receipts, receipt => {
+    info.total = info.total + receipt.total;
+  });
+
+  // concatonate readable date range
+  info.dateRange = `From ${receipts[receipts.length - 1].dateString} to ${receipts[0].dateString}`;
+
+  const res = await axios.post('/api/collections', info);
+
+  dispatch({ type: CREATE_COLLECTION, payload: res.data });
+
+  await axios.delete('/api/receipts');
 };

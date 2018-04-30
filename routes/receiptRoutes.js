@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const Receipt = require('../models/Receipt');
 
 module.exports = app => {
@@ -36,5 +37,12 @@ module.exports = app => {
     const deleteReceipt = await Receipt.findByIdAndRemove(req.params.id);
 
     res.send(deleteReceipt);
+  });
+
+  // DELETE ALL RECEIPTS AFTER COLLECTION IS FINALIZED
+  app.delete('/api/receipts', async (req, res) => {
+    const deleteReceipts = await Receipt.find().remove();
+
+    res.send(deleteReceipts);
   });
 };
