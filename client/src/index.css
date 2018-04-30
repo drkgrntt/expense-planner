@@ -2,4 +2,117 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: rgb(240,240,240);
+}
+
+p {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+a {
+  cursor: pointer;
+}
+
+/* ================= */
+/*   Header Styles   */
+/* ================= */
+
+.header {
+  background-color: rgb(215,215,235);
+  box-shadow: 0px 5px 10px rgba(0,0,0,.5);
+  padding: 10px;
+  height: 80px;
+  line-height: 60px;
+}
+
+.header-item {
+  padding-right: 10px;
+  padding-left: 10px;
+  height: 60px;
+  font-size: 30px;
+  color: rgb(80,80,80);
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: 2px;
+    height: 50px;
+  }
+
+  .header-item {
+    height: 30px;
+    font-size: 17px;
+    line-height: 38px;
+    position: relative;
+    top: 5px;
+  }
+
+  .option {
+    top: -5px;
+  }
+}
+
+.dropdown {
+  background-color: rgb(215,215,235);
+  border: 1px solid rgb(80,80,80);
+  border-top: 0;
+  margin: 0;
+  border-radius: 5px;
+  z-index: 1;
+  position: relative;
+  top: -6px;
+  box-shadow: 0px 5px 10px rgba(0,0,0,.5);
+}
+
+.right {
+  float: right;
+}
+
+/* ======================= */
+/*   Receipt List Styles   */
+/* ======================= */
+
+.list {
+  background-color: rgb(215,215,235);
+}
+
+.item {
+  font-size: 17px;
+  margin: 0;
+}
+
+/* ================= */
+/*    Form Styles    */
+/* ================= */
+
+.receipt-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.form {
+  background-color: rgb(215,215,235);
+  flex-basis: 90%;
+  max-width: 90%;
+}
+
+@media (min-width: 700px) {
+  .form {
+    flex-basis: 45%;
+    max-width: 45%;
+  }
+}
+
+.error {
+  color: red;
+  font-style: italic;
+}
+
+.border {
+  border: 1px solid rgb(80,80,80);
+  border-radius: 5px;
+  padding: 10px;
 }
