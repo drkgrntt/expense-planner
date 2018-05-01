@@ -37,15 +37,51 @@ class ShowCollection extends Component {
     });
   }
 
+  renderCategories(items, categories) {
+    let categoryTotals = {};
+
+    categories.forEach(category => {
+      _.map(items, item => {
+        if (item.category === category) {
+          if (categoryTotals[category]) {
+            categoryTotals[category] = categoryTotals[category] + item.cost;
+          } else {
+            categoryTotals[category] = item.cost;
+          }
+        }
+      });
+    });
+
+    return _.map(categoryTotals, (total, category) => {
+      return <span key={`${category}: ${total}`}>{category}: ${total} || </span>;
+    });
+  }
+
   render() {
     const { collection } = this.props;
+
+    let array = [];
+    let items = [];
+    
+    _.map(collection.receipts, receipt => {
+      _.map(receipt.items, item => {
+        array.push(item.category);
+        items.push(item);
+      });
+    });
+
+    const categories = new Set(array);
 
     return (
       <div style={{ marginBottom: 30 }}>
         <h4>{collection.dateRange}</h4>
         <hr />
         <h4>Total: ${collection.total}</h4>
+        <hr />
+        <h5>Category Totals:</h5>
+        <h5>{this.renderCategories(items, categories)}</h5>
         <div className="card-panel list">
+          <h4>Receipts</h4>
           <hr />
           <ul>{this.renderReceiptList(collection.receipts)}</ul>
         </div>
