@@ -1,17 +1,17 @@
 import React from 'react';
-import ReceiptForm from './ReceiptForm';
+import ExpenseForm from './ExpenseForm';
 import ItemForm from './ItemForm';
 
-const NewReceipt = () => {
+const NewExpense = () => {
   return (
     <div>
       <h4>Add a Receipt</h4>
-      <div className="receipt-form">
-        <ReceiptForm />
+      <div className="expense-form">
+        <ExpenseForm />
         <ItemForm />
       </div>
     </div>
   );
 }
 
-export default NewReceipt;
+export default NewExpense;

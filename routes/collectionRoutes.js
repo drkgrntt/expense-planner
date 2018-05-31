@@ -1,8 +1,8 @@
 const Collection = require('../models/Collection');
-const Receipt = require('../models/Receipt');
+const Expense = require('../models/Expense');
 
 module.exports = app => {
-  // INDEX RECEIPT COLLECTIONS ROUTE
+  // INDEX EXPENSE COLLECTIONS ROUTE
   app.get('/api/collections', async (req, res) => {
     const collections = await Collection.find().sort({ created: -1 });
 
@@ -18,8 +18,8 @@ module.exports = app => {
 
   // CREATE A COLLECTION ROUTE
   app.post('/api/collections', (req, res) => {
-    const { total, receipts, dateRange } = req.body;
-    const collection = new Collection({ total, receipts, dateRange });
+    const { total, expenses, dateRange } = req.body;
+    const collection = new Collection({ total, expenses, dateRange });
 
     collection.save();
     res.send(collection);

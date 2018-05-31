@@ -6,7 +6,7 @@ import { createItem, submitItemFail, updateItem } from '../actions';
 class ItemForm extends Component {
   // HANDLE SUBMIT
   onSubmit(values) {
-    const { createItem, updateItem, submitItemFail, initialValues, receipt } = this.props;
+    const { createItem, updateItem, submitItemFail, initialValues, expense } = this.props;
     const { category, cost, description } = values;
 
     // no empty fields
@@ -16,7 +16,7 @@ class ItemForm extends Component {
 
     // if the form had initial values, update the selected item
     if (initialValues._id) {
-      return updateItem(receipt.items, initialValues._id, values);
+      return updateItem(expense.items, initialValues._id, values);
     }
 
     // if no selected item, create a new item
@@ -25,16 +25,16 @@ class ItemForm extends Component {
 
   // RENDER ITEM FORM
   render() {
-    const { handleSubmit, receipt } = this.props;
+    const { handleSubmit, expense } = this.props;
 
     return (
       <form 
         className="card-panel form"
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
       >
-        <h5>Itemize the receipt</h5>
+        <h5>Itemize the expense</h5>
         <hr />
-        <span className="error">{receipt.itemError}</span>
+        <span className="error">{expense.itemError}</span>
         <h5>Category</h5>
         <Field
           name="category"
@@ -70,7 +70,7 @@ class ItemForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return { receipt: state.receipts, initialValues: state.receipts.selectedItem };
+  return { expense: state.expenses, initialValues: state.expenses.selectedItem };
 };
 
 const formConfig = reduxForm({

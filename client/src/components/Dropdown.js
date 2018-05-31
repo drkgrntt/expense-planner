@@ -14,7 +14,7 @@ class Dropdown extends Component {
       return (
         <ul className="dropdown">
           <li><Link to="/" className="header-item option">Home</Link></li>
-          <li><Link to="/receipt" className="header-item option">New Receipt</Link></li>
+          <li><Link to="/expense" className="header-item option">New Expense</Link></li>
           <li><Link to="/collections" className="header-item option">Collections</Link></li>
           <li><Link
             to="#" 

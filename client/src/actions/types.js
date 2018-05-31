@@ -2,12 +2,12 @@ export const CREATE_COLLECTION = 'create_collection';
 export const FETCH_COLLECTIONS = 'fetch_collections';
 export const FETCH_COLLECTION = 'fetch_collection';
 
-export const FETCH_RECEIPTS = 'fetch_receipts';
-export const CREATE_RECEIPT = 'create_receipt';
-export const FETCH_RECEIPT = 'fetch_receipt';
-export const UPDATE_RECEIPT = 'update_receipt';
-export const DELETE_RECEIPT = 'delete_receipt';
-export const UNFETCH_RECEIPT = 'unfetch_receipt';
+export const FETCH_EXPENSES = 'fetch_expenses';
+export const CREATE_EXPENSE = 'create_expense';
+export const FETCH_EXPENSE = 'fetch_expense';
+export const UPDATE_EXPENSE = 'update_expense';
+export const DELETE_EXPENSE = 'delete_expense';
+export const UNFETCH_EXPENSE = 'unfetch_expense';
 
 export const CREATE_ITEM = 'create_item';
 export const FETCH_ITEM = 'fetch_item';

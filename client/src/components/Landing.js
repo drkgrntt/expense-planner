@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { 
-  fetchReceipts, 
-  deleteReceipt, 
-  fetchReceipt, 
+  fetchExpenses, 
+  deleteExpense, 
+  fetchExpense, 
   createCollection 
 } from '../actions';
 
 class Landing extends Component {
   componentDidMount() {
-    this.props.fetchReceipts();
+    this.props.fetchExpenses();
   }
 
+  // SHOW EACH ITEM FOR EACH EXPENSE
   renderItemizations(items) {
     return _.map(items, (item, i) => {
       return (
@@ -25,39 +26,39 @@ class Landing extends Component {
   }
 
   // ASK FOR CONFIRMATION BEFORE DELETING
-  onDeleteClick(receipt) {
+  onDeleteClick(expense) {
     const confirm = window.confirm('Are you sure?');
 
     if (confirm) {
-      return this.props.deleteReceipt(receipt._id);
+      return this.props.deleteExpense(expense._id);
     }
   }
 
-  // RENDER EACH INDIVIDUAL RECEIPT
-  renderReceiptList() {
-    const { receipts, fetchReceipt } = this.props;
+  // RENDER EACH INDIVIDUAL EXPENSE
+  renderExpenseList() {
+    const { expenses, fetchExpense } = this.props;
     
-    if (receipts[0] === undefined) {
-      return <h4>No receipts</h4>;
+    if (expenses[0] === undefined) {
+      return <h4>No expenses</h4>;
     }
 
-    return _.map(receipts, receipt => {
+    return _.map(expenses, expense => {
       return (
-        <li key={receipt._id}>
-          <h5>Cost: ${receipt.total} || Date: {receipt.dateString}</h5>
+        <li key={expense._id}>
+          <h5>Cost: ${expense.total} || Date: {expense.dateString}</h5>
           <div style={{ marginLeft: 20 }}>
             <p className="item">Itemizations:</p>
-            <ul style={{ marginLeft: 20 }}>{this.renderItemizations(receipt.items)}</ul>
+            <ul style={{ marginLeft: 20 }}>{this.renderItemizations(expense.items)}</ul>
           </div>
           <button 
-            onClick={this.onDeleteClick.bind(this, receipt)} className="btn red lighten-2 right"
+            onClick={this.onDeleteClick.bind(this, expense)} className="btn red lighten-2 right"
             style={{ marginBottom: 10 }}
           >
             Delete
           </button>
           <Link 
-            to="/receipt"
-            onClick={() => fetchReceipt(receipt._id)} 
+            to="/expense"
+            onClick={() => fetchExpense(expense._id)} 
             className="btn orange lighten-2 right"
             style={{ marginRight: 10 }}
           >
@@ -72,21 +73,21 @@ class Landing extends Component {
 
   // HANDLE FINALIZE BUTTON CLICK
   onFinalizeClick() {
-    const { createCollection, receipts } = this.props;
-    const confirm = window.confirm("Are you sure you're ready to finalize these receipts? (This will be a permanent save.)");
+    const { createCollection, expenses } = this.props;
+    const confirm = window.confirm("Are you sure you're ready to finalize these expenses? (This will be a permanent save.)");
 
     if (confirm) {
-      createCollection(receipts);
+      createCollection(expenses);
     }
   }
 
   render() {
     return (
       <div style={{ marginBottom: 30 }}>
-        <h3>Receipts</h3>
+        <h3>Planned Expenses</h3>
         <div className="card-panel list">
           <hr />
-          <ul>{this.renderReceiptList()}</ul>
+          <ul>{this.renderExpenseList()}</ul>
         </div>
         <Link
           to="/collections"
@@ -101,14 +102,14 @@ class Landing extends Component {
 }
 
 const mapStateToProps = state => {
-  return { receipts: state.receipts.receiptList };
+  return { expenses: state.expenses.expenseList };
 };
 
 export default connect(
   mapStateToProps, { 
-    fetchReceipts, 
-    deleteReceipt, 
-    fetchReceipt,
+    fetchExpenses, 
+    deleteExpense, 
+    fetchExpense,
     createCollection
   }
 )(Landing);

@@ -9,7 +9,7 @@ class IndexCollections extends Component {
     this.props.fetchCollections();
   }
 
-  // RENDER EACH INDIVIDUAL COLLECTION OF RECEIPTS
+  // RENDER EACH INDIVIDUAL COLLECTION OF EXPENSES
   renderCollectionList() {
     const { collections } = this.props;
 
@@ -22,7 +22,7 @@ class IndexCollections extends Component {
         <li key={collection._id}>
           <h5>Date Range: {collection.dateRange} || Total Cost: ${collection.total}</h5>
           <Link to={`/collections/${collection._id}`} className="btn green lighten-2 right">
-            Receipts
+            Expenses
           </Link>
           <br /><br />
           <hr />

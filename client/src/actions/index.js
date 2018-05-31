@@ -5,11 +5,11 @@ import {
   FETCH_COLLECTIONS,
   FETCH_COLLECTION,
 
-  CREATE_RECEIPT,
-  FETCH_RECEIPTS,
-  FETCH_RECEIPT,
-  UPDATE_RECEIPT,
-  UNFETCH_RECEIPT,
+  CREATE_EXPENSE,
+  FETCH_EXPENSES,
+  FETCH_EXPENSE,
+  UPDATE_EXPENSE,
+  UNFETCH_EXPENSE,
 
   CREATE_ITEM,
   FETCH_ITEM,
@@ -34,61 +34,61 @@ export const fetchCollection = id => async dispatch => {
 };
 
 // ============================
-//       RECEIPT ACTIONS
+//       EXPENSE ACTIONS
 // ============================
 
-// CREATE A NEW RECEIPT
-export const createReceipt = (values, history) => async dispatch => {
-  const res = await axios.post('/api/receipts', values);
+// CREATE A NEW EXPENSE
+export const createExpense = (values, history) => async dispatch => {
+  const res = await axios.post('/api/expenses', values);
 
   history.push('/');
-  dispatch({ type: CREATE_RECEIPT, payload: res.data });
+  dispatch({ type: CREATE_EXPENSE, payload: res.data });
 };
 
-// FETCH ALL RECEIPTS
-export const fetchReceipts = () => async dispatch => {
-  const res = await axios.get('/api/receipts');
+// FETCH ALL EXPENSES
+export const fetchExpenses = () => async dispatch => {
+  const res = await axios.get('/api/expenses');
 
-  dispatch({ type: FETCH_RECEIPTS, payload: res.data });
+  dispatch({ type: FETCH_EXPENSES, payload: res.data });
 };
 
-// FETCH ONE RECEIPT
-export const fetchReceipt = id => async dispatch => {
-  const res = await axios.get(`/api/receipts/${id}`);
+// FETCH ONE EXPENSE
+export const fetchExpense = id => async dispatch => {
+  const res = await axios.get(`/api/expenses/${id}`);
 
-  dispatch({ type: FETCH_RECEIPT, payload: res.data });
+  dispatch({ type: FETCH_EXPENSE, payload: res.data });
 };
 
-// EDIT FETCHED RECEIPT
-export const updateReceipt = (id, values, history) => async dispatch => {
-  await axios.put(`/api/receipts/${id}`, values);
+// EDIT FETCHED EXPENSE
+export const updateExpense = (id, values, history) => async dispatch => {
+  await axios.put(`/api/expenses/${id}`, values);
 
   history.push('/');
-  dispatch({ type: UPDATE_RECEIPT });
+  dispatch({ type: UPDATE_EXPENSE });
 };
 
-// DELETE ONE RECEIPT
-export const deleteReceipt = id => async dispatch => {
-  await axios.delete(`/api/receipts/${id}`);
+// DELETE ONE EXPENSE
+export const deleteExpense = id => async dispatch => {
+  await axios.delete(`/api/expenses/${id}`);
 
-  dispatch(fetchReceipts());
+  dispatch(fetchExpenses());
 };
 
-// GIVE A CLEAN FORM WHEN "NEW RECEIPT" IS CLICKED
-export const unfetchReceipt = () => dispatch => {
-  dispatch({ type: UNFETCH_RECEIPT });
+// GIVE A CLEAN FORM WHEN "NEW EXPENSE" IS CLICKED
+export const unfetchExpense = () => dispatch => {
+  dispatch({ type: UNFETCH_EXPENSE });
 };
 
 // ============================
 //         ITEM ACTIONS
 // ============================
 
-// CREATE ITEMS FOR RECEIPTS
+// CREATE ITEMS FOR EXPENSES
 export const createItem = values => dispatch => {
   dispatch({ type: CREATE_ITEM, payload: values });
 };
 
-// FETCH ONE RECEIPT ITEM
+// FETCH ONE EXPENSE ITEM
 export const fetchItem = item => dispatch => {
   dispatch({ type: FETCH_ITEM, payload: item });
 };
@@ -146,24 +146,24 @@ export const submitItemFail = () => dispatch => {
 // ============================
 
 // CREATE A NEW COLLECTION
-export const createCollection = receipts => async dispatch => {
+export const createCollection = expenses => async dispatch => {
   let info = {
     total: 0,
-    receipts: receipts,
+    expenses: expenses,
     dateRange: ''
   };
 
   // add collection total
-  _.map(receipts, receipt => {
-    info.total = info.total + receipt.total;
+  _.map(expenses, expense => {
+    info.total = info.total + expense.total;
   });
 
   // concatonate readable date range
-  info.dateRange = `From ${receipts[receipts.length - 1].dateString} to ${receipts[0].dateString}`;
+  info.dateRange = `From ${expenses[expenses.length - 1].dateString} to ${expenses[0].dateString}`;
 
   const res = await axios.post('/api/collections', info);
 
   dispatch({ type: CREATE_COLLECTION, payload: res.data });
 
-  await axios.delete('/api/receipts');
+  await axios.delete('/api/expenses');
 };

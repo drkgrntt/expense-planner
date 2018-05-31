@@ -4,26 +4,26 @@ import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { 
-  createReceipt, 
-  updateReceipt,
+  createExpense, 
+  updateExpense,
   deleteItem,
   fetchItem
 } from '../actions';
 
-class ReceiptForm extends Component {
+class ExpenseForm extends Component {
   // HANDLE SUBMIT
   onSubmit(date) {
-    const { createReceipt, updateReceipt, history, receipt } = this.props;
+    const { createExpense, updateExpense, history, expense } = this.props;
     const values = {
-      total: receipt.total,
-      items: receipt.items,
+      total: expense.total,
+      items: expense.items,
     }
 
-    if (receipt.selectedId) {
-      return updateReceipt(receipt.selectedId, values, history);
+    if (expense.selectedId) {
+      return updateExpense(expense.selectedId, values, history);
     }
 
-    return createReceipt(values, history);
+    return createExpense(values, history);
   }
 
   // EDIT ITEM
@@ -33,15 +33,15 @@ class ReceiptForm extends Component {
 
   // DELETE ITEM
   onDeleteClick(item) {
-    const { receipt, deleteItem } = this.props;
+    const { expense, deleteItem } = this.props;
     const confirm = window.confirm("Are you sure?");
 
     if (confirm) {
-      deleteItem(receipt.items, item._id);
+      deleteItem(expense.items, item._id);
     }
   }
 
-  // RENDER ITEMIZATIONS FOR EACH RECEIPT
+  // RENDER ITEMIZATIONS FOR EACH EXPENSE
   renderItems(items) {
     return _.map(items, (item, i) => {
       return (
@@ -63,7 +63,7 @@ class ReceiptForm extends Component {
 
   // ESSENTIALLY FOR RENDERING THE TITLE
   renderItemizations() {
-    const { items } = this.props.receipt;
+    const { items } = this.props.expense;
 
     if (items.length !== 0) {
       return (
@@ -78,9 +78,9 @@ class ReceiptForm extends Component {
     }
   }
 
-  // RENDER RECEIPT FORM
+  // RENDER EXPENSE FORM
   render() {
-    const { handleSubmit, receipt } = this.props;
+    const { handleSubmit, expense } = this.props;
 
     return (
       <form
@@ -90,7 +90,7 @@ class ReceiptForm extends Component {
         {this.renderItemizations()}
         <h5>Total Cost</h5>
         <hr />
-        <h4>${receipt.total}</h4>
+        <h4>${expense.total}</h4>
         <button
           type="submit"
           className="btn green lighten-2"
@@ -103,13 +103,13 @@ class ReceiptForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return { receipt: state.receipts };
+  return { expense: state.expenses };
 };
 
 export default reduxForm({
-  form: 'ReceiptForm'
+  form: 'ExpenseForm'
 })(
   connect(
-    mapStateToProps, { createReceipt, updateReceipt, deleteItem, fetchItem }
-  )(withRouter(ReceiptForm))
+    mapStateToProps, { createExpense, updateExpense, deleteItem, fetchItem }
+  )(withRouter(ExpenseForm))
 );

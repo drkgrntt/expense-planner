@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing';
-import NewReceipt from './NewReceipt';
+import NewExpense from './NewExpense';
 import IndexCollections from './IndexCollections';
 import ShowCollection from './ShowCollection';
 
@@ -17,7 +17,7 @@ class App extends Component {
           <Header />
           <div className="container">
             <Route exact path="/" component={Landing} />
-            <Route exact path="/receipt" component={NewReceipt} />
+            <Route exact path="/expense" component={NewExpense} />
             <Route exact path="/collections" component={IndexCollections} />
             <Route exact path="/collections/:id" component={ShowCollection} />
           </div>

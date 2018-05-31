@@ -1,5 +1,5 @@
 {
-  "name": "receipts",
+  "name": "planner",
   "version": "1.0.0",
   "description": "A simple app for consuming receipts and itemizing them for a weekly expense report.",
   "main": "app.js",

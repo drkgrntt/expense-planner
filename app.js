@@ -13,7 +13,7 @@ mongoose.Promise = global.Promise;
 app.use(bodyParser.json());
 
 // ROUTES
-require('./routes/receiptRoutes')(app);
+require('./routes/expenseRoutes')(app);
 require('./routes/collectionRoutes')(app);
 
 // DEPLOYMENT CONFIG

@@ -22,14 +22,14 @@ class ShowCollection extends Component {
     });    
   }
 
-  renderReceiptList(receipts) {
-    return _.map(receipts, receipt => {
+  renderExpenseList(expenses) {
+    return _.map(expenses, expense => {
       return (
-        <li key={receipt._id}>
-          <h5>Cost: ${receipt.total} || Date: {receipt.dateString}</h5>
+        <li key={expense._id}>
+          <h5>Cost: ${expense.total} || Date: {expense.dateString}</h5>
           <div style={{ marginLeft: 20 }}>
             <p className="item">Itemizations:</p>
-            <ul style={{ marginLeft: 20 }}>{this.renderItemizations(receipt.items)}</ul>
+            <ul style={{ marginLeft: 20 }}>{this.renderItemizations(expense.items)}</ul>
           </div>    
           <hr />  
         </li>
@@ -63,8 +63,8 @@ class ShowCollection extends Component {
     let array = [];
     let items = [];
     
-    _.map(collection.receipts, receipt => {
-      _.map(receipt.items, item => {
+    _.map(collection.expenses, expense => {
+      _.map(expense.items, item => {
         array.push(item.category);
         items.push(item);
       });
@@ -81,9 +81,9 @@ class ShowCollection extends Component {
         <h5>Category Totals:</h5>
         <h5>{this.renderCategories(items, categories)}</h5>
         <div className="card-panel list">
-          <h4>Receipts</h4>
+          <h4>Expenses</h4>
           <hr />
-          <ul>{this.renderReceiptList(collection.receipts)}</ul>
+          <ul>{this.renderExpenseList(collection.expenses)}</ul>
         </div>
         <Link to="/collections" className="btn blue lighten-2">
           Back

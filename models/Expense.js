@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const date = new Date();
 const dateString = date.toDateString();
 
-const receiptSchema = new Schema({
+const expenseSchema = new Schema({
   total: Number,
   items: [
     {
@@ -20,4 +20,4 @@ const receiptSchema = new Schema({
   usePushEach: true
 });
 
-module.exports = mongoose.model('receipt', receiptSchema);
+module.exports = mongoose.model('expense', expenseSchema);

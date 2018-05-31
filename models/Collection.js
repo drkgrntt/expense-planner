@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const collectionSchema = new Schema({
   total: Number,
-  receipts: [
+  expenses: [
     {
       total: Number,
       items: [

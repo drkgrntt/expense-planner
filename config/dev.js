@@ -1,5 +1,5 @@
 // DEVELOPMENT ENVIRONMENT VARIABLES
 module.exports = {
-  mongoURI: 'mongodb://localhost/receipts',
+  mongoURI: 'mongodb://localhost/planner',
   port: 8080
 };

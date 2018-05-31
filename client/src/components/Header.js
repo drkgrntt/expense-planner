@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dropdown from './Dropdown';
-import { unfetchReceipt } from '../actions';
+import { unfetchExpense } from '../actions';
 
 class Header extends Component {
   constructor(props) {
@@ -34,11 +34,11 @@ class Header extends Component {
       <div className="right">
         <Link to="/collections" className="header-item option">Collections</Link>
         <Link 
-          to="/receipt" 
+          to="/expense" 
           className="header-item option"
-          onClick={() => this.props.unfetchReceipt()}
+          onClick={() => this.props.unfetchExpense()}
         >
-          New Receipt
+          New Expense
         </Link>
         <Link to="/" className="header-item option">Home</Link>
       </div>
@@ -48,15 +48,11 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <img 
-          src="http://www.riskgenius.com/wp-content/uploads/2017/12/RGlogo-2018_200h_web.png"
-          className="header-item"
-          alt="risk genius logo"
-        />
+        <h1 className="header-title">Expense Planner</h1>
         {this.renderMenu()}
       </div>
     );
   }
 }
 
-export default connect(null, { unfetchReceipt })(Header);
+export default connect(null, { unfetchExpense })(Header);
