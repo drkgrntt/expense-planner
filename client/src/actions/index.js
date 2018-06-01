@@ -19,20 +19,6 @@ import {
   SUBMIT_ITEM_FAIL
 } from './types';
 
-// FETCH ALL COLLECTIONS
-export const fetchCollections = () => async dispatch => {
-  const res = await axios.get('/api/collections');
-
-  dispatch({ type: FETCH_COLLECTIONS, payload: res.data });
-};
-
-// FETCH ONE COLLECTION
-export const fetchCollection = id => async dispatch => {
-  const res = await axios.get(`/api/collections/${id}`);
-
-  dispatch({ type: FETCH_COLLECTION, payload: res.data });
-};
-
 // ============================
 //       EXPENSE ACTIONS
 // ============================
@@ -144,6 +130,20 @@ export const submitItemFail = () => dispatch => {
 // ============================
 //      COLLECTION ACTIONS
 // ============================
+
+// FETCH ALL COLLECTIONS
+export const fetchCollections = () => async dispatch => {
+  const res = await axios.get('/api/collections');
+
+  dispatch({ type: FETCH_COLLECTIONS, payload: res.data });
+};
+
+// FETCH ONE COLLECTION
+export const fetchCollection = id => async dispatch => {
+  const res = await axios.get(`/api/collections/${id}`);
+
+  dispatch({ type: FETCH_COLLECTION, payload: res.data });
+};
 
 // CREATE A NEW COLLECTION
 export const createCollection = expenses => async dispatch => {

@@ -3,6 +3,10 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: rgb(240,240,240);
+  background-image: url('http://renatures.com/wp-content/uploads/2016/11/beaches-bora-island-vacation-isle-mountain-sun-sky-trees-beach-water-summer-sunshine-blue-sea-hill-ocean-clouds-paradise-palms-wallpaper-high-resolution-1920x1080.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 p {
@@ -14,12 +18,17 @@ a {
   cursor: pointer;
 }
 
+.outline {
+  color: rgb(235,235,255);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
 /* ================= */
 /*   Header Styles   */
 /* ================= */
 
 .header {
-  background-color: rgb(215,215,235);
+  background-color: rgba(215,215,235,0.8);
   box-shadow: 0px 5px 10px rgba(0,0,0,.5);
   padding: 10px;
   height: 80px;
@@ -30,12 +39,12 @@ a {
   padding-right: 10px;
   padding-left: 10px;
   height: 60px;
-  font-size: 30px;
+  font-size: 26px;
   color: rgb(80,80,80);
 }
 
 .header-title {
-  font-size: 40px;
+  font-size: 38px;
   font-style: italic;
   margin-top: 8px;
   display: inline-block;
@@ -48,6 +57,10 @@ a {
     height: 50px;
   }
 
+  .header-title {
+    font-size: 25px;
+  }
+
   .header-item {
     height: 30px;
     font-size: 17px;
@@ -57,12 +70,19 @@ a {
   }
 
   .option {
+    margin-top: 0;
     top: -5px;
   }
 }
 
+@media (max-width: 600px) {
+  .header-title {
+    font-size: 17px;
+  }
+}
+
 .dropdown {
-  background-color: rgb(215,215,235);
+  background-color: rgba(215,215,235,0.8);
   border: 1px solid rgb(80,80,80);
   border-top: 0;
   margin: 0;
@@ -82,7 +102,7 @@ a {
 /* ======================= */ 
 
 .list {
-  background-color: rgb(215,215,235);
+  background-color: rgba(215,215,235,0.8);
 }
 
 .item {

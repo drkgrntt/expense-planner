@@ -20,7 +20,7 @@ class IndexCollections extends Component {
     return _.map(collections, collection => {
       return (
         <li key={collection._id}>
-          <h5>Date Range: {collection.dateRange} || Total Cost: ${collection.total}</h5>
+          <h5>Total Cost: ${collection.total.toFixed(2)}</h5>
           <Link to={`/collections/${collection._id}`} className="btn green lighten-2 right">
             Expenses
           </Link>

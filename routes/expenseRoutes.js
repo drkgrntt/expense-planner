@@ -26,7 +26,7 @@ module.exports = app => {
   });
 
   // UPDATE EXPENSE ROUTE
-  app.put('/api/expense/:id', async (req, res) => {
+  app.put('/api/expenses/:id', async (req, res) => {
     const updatedExpense = await Expense.findByIdAndUpdate(req.params.id, req.body);
 
     res.send(updatedExpense);

@@ -48,7 +48,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <h1 className="header-title">Expense Planner</h1>
+        <h1 className="header-title">Vacation Expense Planner</h1>
         {this.renderMenu()}
       </div>
     );
