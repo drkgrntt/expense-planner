@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const Expense = require('../models/Expense');
 
 module.exports = app => {
@@ -21,22 +20,33 @@ module.exports = app => {
     const { total, items } = req.body;
     const expense = new Expense({ total, items });
 
-    expense.save();
-    res.send(expense);
+    expense.save((err, expense) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      return res.send({ message: "Expense successfully created", expense });
+    });
   });
 
   // UPDATE EXPENSE ROUTE
   app.put('/api/expenses/:id', async (req, res) => {
-    const updatedExpense = await Expense.findByIdAndUpdate(req.params.id, req.body);
+    const updatedExpense = await Expense.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
-    res.send(updatedExpense);
+    updatedExpense.save((err, expense) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      return res.send({ message: "Expense successfully updated", expense });
+    });
   });
 
   // DELETE EXPENSE ROUTE
   app.delete('/api/expenses/:id', async (req, res) => {
     const deleteExpense = await Expense.findByIdAndRemove(req.params.id);
 
-    res.send(deleteExpense);
+    res.send({ message: "Expense successfully deleted", deleteExpense });
   });
 
   // DELETE ALL EXPENSES AFTER COLLECTION IS FINALIZED

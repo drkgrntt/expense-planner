@@ -26,6 +26,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // FIRE IT UP
-app.listen(keys.port, process.env.IP, () => {
+module.exports = app.listen(keys.port, process.env.IP, () => {
   console.log('Server is running');
 });

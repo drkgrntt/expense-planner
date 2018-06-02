@@ -6,13 +6,16 @@ const dateString = date.toDateString();
 
 const expenseSchema = new Schema({
   total: Number,
-  items: [
-    {
-      category: String,
-      cost: Number,
-      description: String
-    }
-  ],
+  items: { 
+    type: [
+      {
+        category: String,
+        cost: Number,
+        description: String,
+      }
+    ], 
+    required: true 
+  },
   created: { type: Date, default: Date.now },
   dateString: { type: String, default: dateString }
 },
