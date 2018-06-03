@@ -5,7 +5,7 @@ import ItemForm from './ItemForm';
 const NewExpense = () => {
   return (
     <div>
-      <h4>Add a Receipt</h4>
+      <h4 className="outline">Add an expense</h4>
       <div className="expense-form">
         <ExpenseForm />
         <ItemForm />

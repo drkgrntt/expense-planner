@@ -12,25 +12,32 @@ class ShowCollection extends Component {
     fetchCollection(match.params.id);
   }
 
+  // RENDER EACH ITEM FROM EACH EXPENSE
   renderItemizations(items) {
     return _.map(items, (item, i) => {
       return (
         <li key={i}>
-          <p className="item">* Category: {item.category} || Description: {item.description} || Cost: ${item.cost.toFixed(2)}</p>
+          <p className="item">
+            <p className="nospace">Category: {item.category}</p>
+            <p className="nospace">Description: {item.description}</p>
+            <p className="nospace">Cost: ${item.cost.toFixed(2)}</p>
+          </p>
         </li>
       );
-    });    
+    });
   }
 
+  // RENDER EACH EXPENSE
   renderExpenseList(expenses) {
     return _.map(expenses, expense => {
       return (
         <li key={expense._id}>
           <h5>Cost: ${expense.total.toFixed(2)}</h5>
-          <div style={{ marginLeft: 20 }}>
-            <p className="item">Itemizations:</p>
-            <ul style={{ marginLeft: 20 }}>{this.renderItemizations(expense.items)}</ul>
+          <div className="margin20">
+            <p className="item-title">Itemizations:</p>
+            <ul>{this.renderItemizations(expense.items)}</ul>
           </div>    
+          <br />
           <hr />  
         </li>
       );
@@ -66,7 +73,7 @@ class ShowCollection extends Component {
     });
 
     return _.map(categoryTotals, (total, category) => {
-      return <span key={`${category}: ${total}`}>{category}: ${total.toFixed(2)} || </span>;
+      return <span className="btn fake-btn" key={`${category}: ${total}`}>{category}: ${total.toFixed(2)}</span>;
     });
   }
 
@@ -79,16 +86,17 @@ class ShowCollection extends Component {
     
     return (
       <div style={{ marginBottom: 30 }}>
-        <h4>Total: ${collection.total.toFixed(2)}</h4>
-        <hr />
-        <h5>Category Totals:</h5>
-        <h5>|| {this.renderCategories()}</h5>
+        <h3 className="outline">Nashville Trip</h3>
         <div className="card-panel list">
-          <h4>Expenses</h4>
+          <h4 className="center">Trip Total: ${collection.total.toFixed(2)}</h4>
+          <hr />
+          <h5>{this.renderCategories()}</h5>
+          <hr /><hr />
+          <h4 className="center italic">Expenses</h4>
           <hr />
           <ul>{this.renderExpenseList(collection.expenses)}</ul>
         </div>
-        <Link to="/collections" className="btn blue lighten-2">
+        <Link to="/collections" className="btn blue darken-4">
           Back
         </Link>
       </div>

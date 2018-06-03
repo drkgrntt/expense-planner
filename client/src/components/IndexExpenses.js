@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import $ from 'jquery';
+import { Field, reduxForm } from 'redux-form';
 import { 
   fetchExpenses, 
   deleteExpense, 
@@ -12,6 +14,10 @@ import {
 class IndexExpenses extends Component {
   componentDidMount() {
     this.props.fetchExpenses();
+    
+    $(document).ready(() => {
+      $('.modal').modal();
+    });
   }
 
   // SHOW EACH ITEM FOR EACH EXPENSE
@@ -19,7 +25,11 @@ class IndexExpenses extends Component {
     return _.map(items, (item, i) => {
       return (
         <li key={i}>
-          <p className="item">* Category: {item.category} || Description: {item.description} || Cost: ${item.cost.toFixed(2)}</p>
+          <p className="item">
+            <p className="nospace">Category: {item.category}</p>
+            <p className="nospace">Description: {item.description}</p>
+            <p className="nospace">Cost: ${item.cost.toFixed(2)}</p>
+          </p>
         </li>
       );
     });
@@ -46,10 +56,11 @@ class IndexExpenses extends Component {
       return (
         <li key={expense._id}>
           <h5>Cost: ${expense.total.toFixed(2)}</h5>
-          <div style={{ marginLeft: 20 }}>
-            <p className="item">Itemizations:</p>
-            <ul style={{ marginLeft: 20 }}>{this.renderItemizations(expense.items)}</ul>
+          <div className="margin20">
+            <p className="item-title">Itemizations:</p>
+            <ul>{this.renderItemizations(expense.items)}</ul>
           </div>
+          <br />
           <button 
             onClick={this.onDeleteClick.bind(this, expense)} className="btn red lighten-2 right"
             style={{ marginBottom: 10 }}
@@ -72,12 +83,13 @@ class IndexExpenses extends Component {
   }
 
   // HANDLE FINALIZE BUTTON CLICK
-  onFinalizeClick() {
-    const { createCollection, expenses } = this.props;
+  onFinalizeClick(values) {
+    const { createCollection, expenses, withRouter } = this.props;
     const confirm = window.confirm("Are you sure you're ready to finalize these expenses? (This will be a permanent save.)");
 
     if (confirm) {
-      createCollection(expenses);
+      // createCollection(expenses, withRouter);
+      console.log(createCollection, expenses, withRouter, values);
     }
   }
 
@@ -91,13 +103,14 @@ class IndexExpenses extends Component {
 
     return (
       <div>
-        <h4>Total: ${total.toFixed(2)}</h4>
+        <h4>Current Total: ${total.toFixed(2)}</h4>
       </div>
     );
   }
 
   // LOGIC AND DISPLAY FOR CATEGORY TOTALS
   renderCategories() {
+    // category logic
     const { expenses } = this.props;
     let categoryTotals = {};
     let array = [];
@@ -124,9 +137,55 @@ class IndexExpenses extends Component {
       });
     });
 
+    // render categories
     return _.map(categoryTotals, (total, category) => {
-      return <span key={`${category}: ${total}`}>{category}: ${total.toFixed(2)} || </span>;
+      return (
+        <span 
+          key={`${category}: ${total}`}
+          className="btn fake-btn"
+          style={{ margin: 2 }}
+        >
+          {category}: ${total.toFixed(2)}
+        </span>
+      );
     });
+  }
+
+  // Shows finalization modal
+  renderModal() {
+    const { handleSubmit } = this.props;
+
+    return (
+      <div id="modal1" className="modal">
+        <form
+          onSubmit={handleSubmit(this.onFinalizeClick.bind(this))}
+        >
+          <div className="modal-content">
+            <h4>Before you're done</h4>
+            <hr />
+            <h5>Name of your vacation</h5>
+            <Field
+              name="title"
+              component="input"
+              type="text"
+              placeholder="The Bahamas"
+            />
+            <h5>Give a memorable description</h5>
+            <Field
+              name="description"
+              component="textarea"
+              placeholder="We went on an all inclusive cruise!"
+            />
+            <button
+              type="submit"
+              className="modal-close btn blue darken-4 right"
+            >
+              Finalize
+            </button>
+          </div>
+        </form>
+      </div>
+    );
   }
 
   render() {
@@ -136,17 +195,17 @@ class IndexExpenses extends Component {
         <div className="card-panel list">
           {this.renderTotalCost()}
           <hr />
-          <h5>|| {this.renderCategories()}</h5>
+          <h5>{this.renderCategories()}</h5>
           <hr />
           <ul>{this.renderExpenseList()}</ul>
         </div>
-        <Link
-          to="/collections"
-          className="btn blue lighten-2"
-          onClick={() => this.onFinalizeClick()}
+        <a
+          className="btn blue darken-4 modal-trigger"
+          href="#modal1"
         >
-          Finalize
-        </Link>
+          Finish Up
+        </a>
+        {this.renderModal()}
       </div>
     );
   }
@@ -156,6 +215,10 @@ const mapStateToProps = state => {
   return { expenses: state.expenses.expenseList };
 };
 
+const formConfig = reduxForm({
+  form: 'finalizationForm'
+})(withRouter(IndexExpenses));
+
 export default connect(
   mapStateToProps, { 
     fetchExpenses, 
@@ -163,4 +226,4 @@ export default connect(
     fetchExpense,
     createCollection
   }
-)(IndexExpenses);
+)(formConfig);

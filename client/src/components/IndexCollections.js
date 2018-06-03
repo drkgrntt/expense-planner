@@ -20,11 +20,11 @@ class IndexCollections extends Component {
     return _.map(collections, collection => {
       return (
         <li key={collection._id}>
-          <h5>Total Cost: ${collection.total.toFixed(2)}</h5>
+          <h4>Nashville Trip</h4>
+          <h5 style={{ display: "inline-block" }}>Total Cost: ${collection.total.toFixed(2)}</h5>
           <Link to={`/collections/${collection._id}`} className="btn green lighten-2 right">
             Expenses
           </Link>
-          <br /><br />
           <hr />
         </li>
       );
@@ -34,7 +34,7 @@ class IndexCollections extends Component {
   render() {
     return (
       <div style={{ marginBottom: 30 }}>
-        <h3>Collections</h3>
+        <h3 className="outline">Collections</h3>
         <div className="card-panel list">
           <hr />
           <ul>{this.renderCollectionList()}</ul>

@@ -12,15 +12,12 @@ body {
 p {
   white-space: pre-wrap;
   word-wrap: break-word;
+  letter-spacing: .3px;
+  word-spacing: 3px;
 }
 
 a {
   cursor: pointer;
-}
-
-.outline {
-  color: rgb(235,235,255);
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 /* ================= */
@@ -30,9 +27,9 @@ a {
 .header {
   background-color: rgba(215,215,235,0.8);
   box-shadow: 0px 5px 10px rgba(0,0,0,.5);
-  padding: 10px;
   height: 80px;
-  line-height: 60px;
+  line-height: 80px;
+  position: relative;
 }
 
 .header-item {
@@ -41,60 +38,38 @@ a {
   height: 60px;
   font-size: 26px;
   color: rgb(80,80,80);
+  vertical-align: middle;
 }
 
 .header-title {
   font-size: 38px;
   font-style: italic;
-  margin-top: 8px;
+  margin: auto;
+  padding-right: 10px;
+  padding-left: 10px;
   display: inline-block;
   color: rgb(80,80,80);
+  vertical-align: middle;
 }
 
 @media (max-width: 900px) {
   .header {
-    padding: 2px;
     height: 50px;
+    line-height: 50px;
   }
 
   .header-title {
-    font-size: 25px;
+    font-size: 21px;
   }
 
   .header-item {
-    height: 30px;
-    font-size: 17px;
-    line-height: 38px;
-    position: relative;
-    top: 5px;
-  }
-
-  .option {
-    margin-top: 0;
-    top: -5px;
-  }
-}
-
-@media (max-width: 600px) {
-  .header-title {
     font-size: 17px;
   }
 }
 
 .dropdown {
-  background-color: rgba(215,215,235,0.8);
-  border: 1px solid rgb(80,80,80);
-  border-top: 0;
-  margin: 0;
-  border-radius: 5px;
-  z-index: 1;
-  position: relative;
-  top: -6px;
-  box-shadow: 0px 5px 10px rgba(0,0,0,.5);
-}
-
-.right {
-  float: right;
+  position: fixed;
+  top: 0;
 }
 
 /* ======================= */
@@ -102,12 +77,28 @@ a {
 /* ======================= */ 
 
 .list {
-  background-color: rgba(215,215,235,0.8);
+  background-color: rgba(215,215,235,0.9);
+  border-radius: 5px;
+}
+
+.fake-btn {
+  cursor: default;
+}
+
+.item-title {
+  font-size: 17px;
+  margin: 0;
+  border-bottom: 1px solid rgb(130,130,130);
+  border-radius: 5px;
 }
 
 .item {
   font-size: 17px;
   margin: 0;
+  padding: 5px 20px;
+  border: 1px solid rgb(130,130,130);
+  border-top: 0;
+  border-radius: 5px;
 }
 
 /* ================= */
@@ -143,4 +134,35 @@ a {
   border: 1px solid rgb(80,80,80);
   border-radius: 5px;
   padding: 10px;
+}
+
+/* =================== */
+/*     MISC STYLES     */
+/* =================== */
+
+.outline {
+  color: rgb(235,235,255);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.modal {
+  padding-bottom: 20px;
+}
+
+.margin20 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.right {
+  float: right;
+}
+
+.nospace {
+  margin: 0;
+  padding: 0;
+}
+
+.italic {
+  font-style: italic;
 }

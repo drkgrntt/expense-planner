@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Dropdown from './Dropdown';
+import $ from 'jquery';
 import { unfetchExpense } from '../actions';
 
 class Header extends Component {
@@ -12,35 +12,60 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    if (window.innerWidth < 600) {
+    if (window.innerWidth < 620) {
       this.setState({ retracted: true });
     }
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 600) {
-        return this.setState({ retracted: true });
+      if (window.innerWidth < 620) {
+        this.setState({ retracted: true });
+      } else {
+        this.setState({ retracted: false });
       }
+    });
 
-      return this.setState({ retracted: false });
+    $(document).ready(() => {
+      $('.dropdown-trigger').dropdown();
     });
   }
 
   renderMenu() {
+    // Dropdown menu for smaller screens
     if (this.state.retracted) {
-      return <Dropdown />;
+      return (
+        <div className="right">
+          <a className="dropdown-trigger header-item" href="#" data-activates="dropdown1">
+            Menu
+          </a>
+          {/* Dropdown Menu */}
+          <ul id="dropdown1" className="dropdown dropdown-content">
+            <li><Link to="/collections">Collections</Link></li>
+            <li className="divider" tabindex="-1"></li>
+            <li><Link
+              to="/expense"
+              onClick={() => this.props.unfetchExpense()}
+            >
+              New Expense
+            </Link></li>
+            <li className="divider" tabindex="-1"></li>
+            <li><Link to="/">Home</Link></li>
+          </ul>
+        </div>
+      );
     }
 
+    // Regular header
     return (
       <div className="right">
-        <Link to="/collections" className="header-item option">Collections</Link>
+        <Link to="/collections" className="header-item">Collections</Link>
         <Link 
           to="/expense" 
-          className="header-item option"
+          className="header-item"
           onClick={() => this.props.unfetchExpense()}
         >
           New Expense
         </Link>
-        <Link to="/" className="header-item option">Home</Link>
+        <Link to="/" className="header-item">Home</Link>
       </div>
     );
   }
