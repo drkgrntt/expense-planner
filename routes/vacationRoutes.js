@@ -18,8 +18,8 @@ module.exports = app => {
 
   // CREATE A VACATION ROUTE
   app.post('/api/vacations', (req, res) => {
-    const { total, expenses, dateRange } = req.body;
-    const vacation = new Vacation({ total, expenses, dateRange });
+    const { title, description, total, expenses, dateRange } = req.body;
+    const vacation = new Vacation({ title, description, total, expenses, dateRange });
 
     vacation.save();
     res.send(vacation);

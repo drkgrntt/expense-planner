@@ -40,10 +40,15 @@ describe('Expenses', () => {
   // Test POST route
   describe('/POST expenses', () => {
     // Error test
-    it('should not POST a book if there are no items', done => {
-      let expense = {
-        total: 100
-      }
+    it('should not POST an expense if there is no title', done => {
+      let expense = new Expense({
+        total: 100,
+        items: [{
+          category: "Food",
+          cost: 100,
+          description: "Food for the trip"
+        }]
+      });
 
       chai.request(app)
         .post('/api/expenses')
@@ -52,22 +57,23 @@ describe('Expenses', () => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('errors');
-          res.body.errors.should.have.property('items');
-          res.body.errors.items.should.have.property('kind').eql('required');
+          res.body.errors.should.have.property('title');
+          res.body.errors.title.should.have.property('kind').eql('required');
         done();
       });
     });
 
     // Correct post test
     it('should post an expense', done => {
-      let expense = {
+      let expense = new Expense({
+        title: "Trip",
         total: 100,
         items: [{ 
           category: "Food", 
           cost: 100, 
           description: "Food for the trip" 
         }]
-      }
+      });
 
       chai.request(app)
         .post('/api/expenses')
@@ -87,6 +93,7 @@ describe('Expenses', () => {
   describe('/GET/:id expense', () => {
     it('should GET an expense by the given id', done => {
       let expense = new Expense({
+        title: "Trip",
         total: 100,
         items: [{
           category: "Food",
@@ -115,6 +122,7 @@ describe('Expenses', () => {
   describe('/PUT/:id expense', () => {
     it('should UPDATE an expense given the id', done => {
       let expense = new Expense({
+        title: "Trip",
         total: 100,
         items: [{
           category: "Food",
@@ -125,6 +133,7 @@ describe('Expenses', () => {
 
       expense.save((err, expense) => {
         let editedExpense = {
+          title: "Trip",
           total: 150,
           items: [
             {
@@ -158,6 +167,7 @@ describe('Expenses', () => {
   describe('/DELETE/:id expense', () => {
     it('should DELETE an expense given the id', done => {
       let expense = new Expense({
+        title: "Trip",
         total: 100,
         items: [{
           category: "Food",

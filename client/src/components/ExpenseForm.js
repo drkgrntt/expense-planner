@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { 
@@ -12,9 +12,10 @@ import {
 
 class ExpenseForm extends Component {
   // HANDLE SUBMIT
-  onSubmit(date) {
+  onSubmit(value) {
     const { createExpense, updateExpense, history, expense } = this.props;
     const values = {
+      title: value.title,
       total: expense.total,
       items: expense.items,
     }
@@ -96,6 +97,13 @@ class ExpenseForm extends Component {
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         className="card-panel form"
       >
+        <h5>Expense Name</h5>
+        <Field
+          name="title"
+          component="input"
+          type="text"
+          placeholder="Hotel for the trip"
+        />        
         {this.renderItemizations()}
         <h5>Total Cost</h5>
         <hr />
@@ -112,13 +120,19 @@ class ExpenseForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return { expense: state.expenses };
+  return { expense: state.expenses, initialValues: state.expenses };
 };
 
-export default reduxForm({
-  form: 'ExpenseForm'
-})(
-  connect(
-    mapStateToProps, { createExpense, updateExpense, deleteItem, fetchItem }
-  )(withRouter(ExpenseForm))
-);
+const formConfig = reduxForm({
+  form: 'ExpenseForm',
+  enableReinitialize: true
+})(ExpenseForm);
+
+export default connect(
+  mapStateToProps, { 
+    createExpense, 
+    updateExpense, 
+    deleteItem, 
+    fetchItem
+  }
+)(withRouter(formConfig))

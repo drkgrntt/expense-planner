@@ -140,6 +140,13 @@ a {
 /*     MISC STYLES     */
 /* =================== */
 
+.vacation {
+  border: 1px solid rgb(130,130,130);
+  border-radius: 5px;
+  padding: 15px 30px;
+  margin-bottom: 10px;
+}
+
 .outline {
   color: rgb(235,235,255);
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;

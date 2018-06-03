@@ -55,12 +55,12 @@ class IndexExpenses extends Component {
     return _.map(expenses, expense => {
       return (
         <li key={expense._id}>
-          <h5>Cost: ${expense.total.toFixed(2)}</h5>
+          <h5>{expense.title}</h5>
           <div className="margin20">
             <p className="item-title">Itemizations:</p>
             <ul>{this.renderItemizations(expense.items)}</ul>
           </div>
-          <br />
+          <h5>Cost: ${expense.total.toFixed(2)}</h5>
           <button 
             onClick={this.onDeleteClick.bind(this, expense)} className="btn red lighten-2 right"
             style={{ marginBottom: 10 }}
@@ -84,12 +84,11 @@ class IndexExpenses extends Component {
 
   // HANDLE FINALIZE BUTTON CLICK
   onFinalizeClick(values) {
-    const { createVacation, expenses, withRouter } = this.props;
+    const { createVacation, expenses, history } = this.props;
     const confirm = window.confirm("Are you sure you're ready to finalize these expenses? (This will be a permanent save.)");
 
     if (confirm) {
-      // createVacation(expenses, withRouter, values);
-      console.log(createVacation, expenses, withRouter, values);
+      createVacation(expenses, history, values);
     }
   }
 
@@ -217,7 +216,7 @@ const mapStateToProps = state => {
 
 const formConfig = reduxForm({
   form: 'finalizationForm'
-})(withRouter(IndexExpenses));
+})(IndexExpenses);
 
 export default connect(
   mapStateToProps, { 
@@ -226,4 +225,4 @@ export default connect(
     fetchExpense,
     createVacation
   }
-)(formConfig);
+)(withRouter(formConfig));

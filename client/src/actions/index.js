@@ -146,10 +146,12 @@ export const fetchVacation = id => async dispatch => {
 };
 
 // CREATE A NEW VACATION
-export const createVacation = expenses => async dispatch => {
+export const createVacation = (expenses, history, { title, description }) => async dispatch => {
   let info = {
+    title,
+    description,
     total: 0,
-    expenses: expenses,
+    expenses,
     dateRange: ''
   };
 
@@ -163,6 +165,7 @@ export const createVacation = expenses => async dispatch => {
 
   const res = await axios.post('/api/vacations', info);
 
+  history.push('/vacations');
   dispatch({ type: CREATE_VACATION, payload: res.data });
 
   await axios.delete('/api/expenses');

@@ -5,13 +5,14 @@ const date = new Date();
 const dateString = date.toDateString();
 
 const expenseSchema = new Schema({
-  total: Number,
+  title: { type: String, required: true },
+  total: { type: Number, required: true },
   items: { 
     type: [
       {
-        category: String,
-        cost: Number,
-        description: String,
+        category: { type: String, required: true },
+        cost: { type: Number, required: true },
+        description: String
       }
     ], 
     required: true 

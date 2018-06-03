@@ -14,6 +14,7 @@ import {
 const INITIAL_STATE = {
   selectedId: '',
   items: [], 
+  title: '',
   total: 0, 
   itemError: '', 
   expenseList: {},
@@ -23,25 +24,27 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CREATE_EXPENSE:
-      // reset item array and total
-      return { ...state, items: [], total: 0 };
+      // reset title, item array, and total
+      return { ...state, items: [], total: 0, title: '' };
     case FETCH_EXPENSES:
       return { ...state, expenseList: action.payload };
     case FETCH_EXPENSE:
       return { 
         ...state, 
         selectedId: action.payload._id,
+        title: action.payload.title,
         items: action.payload.items,
         total: action.payload.total
       };
     case UPDATE_EXPENSE:
       // reset state after updating
-      return { ...state, selectedId: '', items: [], total: 0 };
+      return { ...state, selectedId: '', items: [], total: 0, title: '' };
     case UNFETCH_EXPENSE:
       return {
         selectedId: '',
         items: [],
         total: 0,
+        title: '',
         itemError: '',
         expenseList: {},
         selectedItem: {}

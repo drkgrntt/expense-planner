@@ -19,13 +19,15 @@ class IndexVacations extends Component {
 
     return _.map(vacations, vacation => {
       return (
-        <li key={vacation._id}>
-          <h4>Nashville Trip</h4>
+        <li className="vacation" key={vacation._id}>
+          <h4>{vacation.title}</h4>
+          <p className="margin20">{vacation.description}</p>
+          <hr />
           <h5 style={{ display: "inline-block" }}>Total Cost: ${vacation.total.toFixed(2)}</h5>
-          <Link to={`/vacations/${vacation._id}`} className="btn green lighten-2 right">
+          <br />
+          <Link to={`/vacations/${vacation._id}`} className="btn green lighten-2">
             Expenses
           </Link>
-          <hr />
         </li>
       );
     });
@@ -36,7 +38,6 @@ class IndexVacations extends Component {
       <div style={{ marginBottom: 30 }}>
         <h3 className="outline">Vacations</h3>
         <div className="card-panel list">
-          <hr />
           <ul>{this.renderVacationList()}</ul>
         </div>
       </div>

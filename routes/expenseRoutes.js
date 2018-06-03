@@ -17,8 +17,8 @@ module.exports = app => {
 
   // CREATE EXPENSE ROUTE
   app.post('/api/expenses', (req, res) => {
-    const { total, items } = req.body;
-    const expense = new Expense({ total, items });
+    const { title, total, items } = req.body;
+    const expense = new Expense({ title, total, items });
 
     expense.save((err, expense) => {
       if (err) {

@@ -86,7 +86,7 @@ class ShowVacation extends Component {
     
     return (
       <div style={{ marginBottom: 30 }}>
-        <h3 className="outline">Nashville Trip</h3>
+        <h3 className="outline italic">{vacation.title}</h3>
         <div className="card-panel list">
           <h4 className="center">Trip Total: ${vacation.total.toFixed(2)}</h4>
           <hr />
