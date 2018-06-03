@@ -40,14 +40,14 @@ class Header extends Component {
           {/* Dropdown Menu */}
           <ul id="dropdown1" className="dropdown dropdown-content">
             <li><Link to="/collections">Collections</Link></li>
-            <li className="divider" tabindex="-1"></li>
+            <li className="divider" tabIndex="-1"></li>
             <li><Link
               to="/expense"
               onClick={() => this.props.unfetchExpense()}
             >
               New Expense
             </Link></li>
-            <li className="divider" tabindex="-1"></li>
+            <li className="divider" tabIndex="-1"></li>
             <li><Link to="/">Home</Link></li>
           </ul>
         </div>

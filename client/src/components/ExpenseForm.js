@@ -46,16 +46,27 @@ class ExpenseForm extends Component {
     return _.map(items, (item, i) => {
       return (
         <li key={i}>
-          <p>* Cost: ${item.cost.toFixed(2)}, Category: {item.category}, Description: {item.description}</p>
-          <br />
-          <a className="right" onClick={this.onDeleteClick.bind(this, item)}>
-            Delete
-          </a>
-          <a style={{ marginRight: 15 }} className="right" onClick={this.onEditClick.bind(this, item)}>
-            Edit
-          </a>
-          <br />
-          <hr />
+          <p className="item">
+            <a
+              className="right"
+              onClick={this.onDeleteClick.bind(this, item)}
+            >
+              Delete
+            </a>
+            <a
+              style={{ marginRight: 15 }}
+              className="right"
+              onClick={this.onEditClick.bind(this, item)}
+            >
+              Edit
+            </a>
+            <br />
+            <p className="nospace">Category: {item.category}</p>
+            <hr className="nospace" />
+            <p className="nospace">Description: {item.description}</p>
+            <hr className="nospace" />
+            <p className="nospace">Cost: ${item.cost.toFixed(2)}</p>
+          </p>
         </li>
       );
     });
