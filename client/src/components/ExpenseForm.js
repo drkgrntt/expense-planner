@@ -62,9 +62,7 @@ class ExpenseForm extends Component {
             </a>
             <br />
             <p className="nospace">Category: {item.category}</p>
-            <hr className="nospace" />
             <p className="nospace">Description: {item.description}</p>
-            <hr className="nospace" />
             <p className="nospace">Cost: ${item.cost.toFixed(2)}</p>
           </p>
         </li>
