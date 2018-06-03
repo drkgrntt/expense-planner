@@ -6,8 +6,8 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import NewExpense from './NewExpense';
-import IndexCollections from './IndexCollections';
-import ShowCollection from './ShowCollection';
+import IndexVacations from './IndexVacations';
+import ShowVacation from './ShowVacation';
 
 class App extends Component {
   render() {
@@ -18,8 +18,8 @@ class App extends Component {
           <div className="container routes">
             <Route exact path="/" component={Landing} />
             <Route exact path="/expense" component={NewExpense} />
-            <Route exact path="/collections" component={IndexCollections} />
-            <Route exact path="/collections/:id" component={ShowCollection} />
+            <Route exact path="/vacations" component={IndexVacations} />
+            <Route exact path="/vacations/:id" component={ShowVacation} />
           </div>
         </div>
       </BrowserRouter>

@@ -49,7 +49,7 @@ module.exports = app => {
     res.send({ message: "Expense successfully deleted", deleteExpense });
   });
 
-  // DELETE ALL EXPENSES AFTER COLLECTION IS FINALIZED
+  // DELETE ALL EXPENSES AFTER VACATION IS FINALIZED
   app.delete('/api/expenses', async (req, res) => {
     const deleteExpenses = await Expense.find().remove();
 

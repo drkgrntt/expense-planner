@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { fetchCollection } from '../actions';
+import { fetchVacation } from '../actions';
 
-class ShowCollection extends Component {
+class ShowVacation extends Component {
   componentDidMount() {
     // this.props.match.params.id is from the URL
-    const { match, fetchCollection } = this.props;
+    const { match, fetchVacation } = this.props;
 
-    fetchCollection(match.params.id);
+    fetchVacation(match.params.id);
   }
 
   // RENDER EACH ITEM FROM EACH EXPENSE
@@ -46,12 +46,12 @@ class ShowCollection extends Component {
 
   // LOGIC AND DISPLAY FOR CATEGORY TOTALS
   renderCategories() {
-    const { collection } = this.props;
+    const { vacation } = this.props;
     let categoryTotals = {};
     let array = [];
     let items = [];
 
-    _.map(collection.expenses, expense => {
+    _.map(vacation.expenses, expense => {
       _.map(expense.items, item => {
         array.push(item.category);
         items.push(item);
@@ -78,9 +78,9 @@ class ShowCollection extends Component {
   }
 
   render() {
-    const { collection } = this.props;
+    const { vacation } = this.props;
 
-    if (collection.total === undefined) {
+    if (vacation.total === undefined) {
       return <h3>Loading . . .</h3>
     }
     
@@ -88,15 +88,15 @@ class ShowCollection extends Component {
       <div style={{ marginBottom: 30 }}>
         <h3 className="outline">Nashville Trip</h3>
         <div className="card-panel list">
-          <h4 className="center">Trip Total: ${collection.total.toFixed(2)}</h4>
+          <h4 className="center">Trip Total: ${vacation.total.toFixed(2)}</h4>
           <hr />
           <h5>{this.renderCategories()}</h5>
           <hr /><hr />
           <h4 className="center italic">Expenses</h4>
           <hr />
-          <ul>{this.renderExpenseList(collection.expenses)}</ul>
+          <ul>{this.renderExpenseList(vacation.expenses)}</ul>
         </div>
-        <Link to="/collections" className="btn blue darken-4">
+        <Link to="/vacations" className="btn blue darken-4">
           Back
         </Link>
       </div>
@@ -105,7 +105,7 @@ class ShowCollection extends Component {
 }
 
 const mapStateToProps = state => {
-  return { collection: state.collections };
+  return { vacation: state.vacations };
 };
 
-export default connect(mapStateToProps, { fetchCollection })(ShowCollection);
+export default connect(mapStateToProps, { fetchVacation })(ShowVacation);

@@ -1,15 +1,15 @@
 import {
-  FETCH_COLLECTION,
-  FETCH_COLLECTIONS
+  FETCH_VACATION,
+  FETCH_VACATIONS
 } from '../actions/types';
 
 const INITIAL_STATE = {};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_COLLECTIONS:
+    case FETCH_VACATIONS:
       return action.payload;
-    case FETCH_COLLECTION:
+    case FETCH_VACATION:
       return action.payload;
     default:
       return state;

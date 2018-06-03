@@ -7,8 +7,8 @@ import { Field, reduxForm } from 'redux-form';
 import { 
   fetchExpenses, 
   deleteExpense, 
-  fetchExpense, 
-  createCollection 
+  fetchExpense,
+  createVacation 
 } from '../actions';
 
 class IndexExpenses extends Component {
@@ -84,12 +84,12 @@ class IndexExpenses extends Component {
 
   // HANDLE FINALIZE BUTTON CLICK
   onFinalizeClick(values) {
-    const { createCollection, expenses, withRouter } = this.props;
+    const { createVacation, expenses, withRouter } = this.props;
     const confirm = window.confirm("Are you sure you're ready to finalize these expenses? (This will be a permanent save.)");
 
     if (confirm) {
-      // createCollection(expenses, withRouter);
-      console.log(createCollection, expenses, withRouter, values);
+      // createVacation(expenses, withRouter, values);
+      console.log(createVacation, expenses, withRouter, values);
     }
   }
 
@@ -224,6 +224,6 @@ export default connect(
     fetchExpenses, 
     deleteExpense, 
     fetchExpense,
-    createCollection
+    createVacation
   }
 )(formConfig);

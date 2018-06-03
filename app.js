@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 require('./routes/expenseRoutes')(app);
-require('./routes/collectionRoutes')(app);
+require('./routes/vacationRoutes')(app);
 
 // DEPLOYMENT CONFIG
 if (process.env.NODE_ENV === 'production') {

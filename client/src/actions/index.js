@@ -1,9 +1,9 @@
 import axios from 'axios';
 import _ from 'lodash';
 import {
-  CREATE_COLLECTION,
-  FETCH_COLLECTIONS,
-  FETCH_COLLECTION,
+  CREATE_VACATION,
+  FETCH_VACATIONS,
+  FETCH_VACATION,
 
   CREATE_EXPENSE,
   FETCH_EXPENSES,
@@ -128,32 +128,32 @@ export const submitItemFail = () => dispatch => {
 };
 
 // ============================
-//      COLLECTION ACTIONS
+//      VACATION ACTIONS
 // ============================
 
-// FETCH ALL COLLECTIONS
-export const fetchCollections = () => async dispatch => {
-  const res = await axios.get('/api/collections');
+// FETCH ALL VACATIONS
+export const fetchVacations = () => async dispatch => {
+  const res = await axios.get('/api/vacations');
 
-  dispatch({ type: FETCH_COLLECTIONS, payload: res.data });
+  dispatch({ type: FETCH_VACATIONS, payload: res.data });
 };
 
-// FETCH ONE COLLECTION
-export const fetchCollection = id => async dispatch => {
-  const res = await axios.get(`/api/collections/${id}`);
+// FETCH ONE VACATION
+export const fetchVacation = id => async dispatch => {
+  const res = await axios.get(`/api/vacations/${id}`);
 
-  dispatch({ type: FETCH_COLLECTION, payload: res.data });
+  dispatch({ type: FETCH_VACATION, payload: res.data });
 };
 
-// CREATE A NEW COLLECTION
-export const createCollection = expenses => async dispatch => {
+// CREATE A NEW VACATION
+export const createVacation = expenses => async dispatch => {
   let info = {
     total: 0,
     expenses: expenses,
     dateRange: ''
   };
 
-  // add collection total
+  // add vacation total
   _.map(expenses, expense => {
     info.total = info.total + expense.total;
   });
@@ -161,9 +161,9 @@ export const createCollection = expenses => async dispatch => {
   // concatonate readable date range
   info.dateRange = `From ${expenses[expenses.length - 1].dateString} to ${expenses[0].dateString}`;
 
-  const res = await axios.post('/api/collections', info);
+  const res = await axios.post('/api/vacations', info);
 
-  dispatch({ type: CREATE_COLLECTION, payload: res.data });
+  dispatch({ type: CREATE_VACATION, payload: res.data });
 
   await axios.delete('/api/expenses');
 };

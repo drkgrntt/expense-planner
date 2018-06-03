@@ -39,7 +39,7 @@ class Header extends Component {
           </a>
           {/* Dropdown Menu */}
           <ul id="dropdown1" className="dropdown dropdown-content">
-            <li><Link to="/collections">Collections</Link></li>
+            <li><Link to="/vacations">Vacations</Link></li>
             <li className="divider" tabIndex="-1"></li>
             <li><Link
               to="/expense"
@@ -57,7 +57,7 @@ class Header extends Component {
     // Regular header
     return (
       <div className="right">
-        <Link to="/collections" className="header-item">Collections</Link>
+        <Link to="/vacations" className="header-item">Vacations</Link>
         <Link 
           to="/expense" 
           className="header-item"

@@ -1,6 +1,6 @@
-export const CREATE_COLLECTION = 'create_collection';
-export const FETCH_COLLECTIONS = 'fetch_collections';
-export const FETCH_COLLECTION = 'fetch_collection';
+export const CREATE_VACATION = 'create_vacation';
+export const FETCH_VACATIONS = 'fetch_vacations';
+export const FETCH_VACATION = 'fetch_vacation';
 
 export const FETCH_EXPENSES = 'fetch_expenses';
 export const CREATE_EXPENSE = 'create_expense';

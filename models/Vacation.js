@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const collectionSchema = new Schema({
+const vacationSchema = new Schema({
   total: Number,
   expenses: [
     {
@@ -24,4 +24,4 @@ const collectionSchema = new Schema({
   usePushEach: true
 });
 
-module.exports = mongoose.model('collection', collectionSchema);
+module.exports = mongoose.model('vacation', vacationSchema);

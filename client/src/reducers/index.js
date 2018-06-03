@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import collectionReducer from './collectionReducer';
+import vacationReducer from './vacationReducer';
 import expenseReducer from './expenseReducer';
 import { CREATE_ITEM } from '../actions/types';
 
 export default combineReducers({
-  collections: collectionReducer,
+  vacations: vacationReducer,
   expenses: expenseReducer,
   form: formReducer.plugin({
     // clear item form after submit
