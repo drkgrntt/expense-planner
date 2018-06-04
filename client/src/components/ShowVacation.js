@@ -32,11 +32,12 @@ class ShowVacation extends Component {
     return _.map(expenses, expense => {
       return (
         <li key={expense._id}>
-          <h5>Cost: ${expense.total.toFixed(2)}</h5>
+          <h5>{expense.title}</h5>
           <div className="margin20">
             <p className="item-title">Itemizations:</p>
             <ul>{this.renderItemizations(expense.items)}</ul>
-          </div>    
+          </div>
+          <h5>Cost: ${expense.total.toFixed(2)}</h5>
           <br />
           <hr />  
         </li>
@@ -73,7 +74,15 @@ class ShowVacation extends Component {
     });
 
     return _.map(categoryTotals, (total, category) => {
-      return <span className="btn fake-btn" key={`${category}: ${total}`}>{category}: ${total.toFixed(2)}</span>;
+      return (
+        <span 
+          className="btn fake-btn" 
+          style={{ margin: 2 }}
+          key={`${category}: ${total}`}
+        >
+          {category}: ${total.toFixed(2)}
+        </span>
+      );
     });
   }
 
@@ -91,7 +100,7 @@ class ShowVacation extends Component {
           <h4 className="center">Trip Total: ${vacation.total.toFixed(2)}</h4>
           <hr />
           <h5>{this.renderCategories()}</h5>
-          <hr /><hr />
+          <hr />
           <h4 className="center italic">Expenses</h4>
           <hr />
           <ul>{this.renderExpenseList(vacation.expenses)}</ul>

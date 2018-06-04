@@ -196,6 +196,8 @@ class IndexExpenses extends Component {
           <hr />
           <h5>{this.renderCategories()}</h5>
           <hr />
+          <h4 className="center italic">Expenses</h4>
+          <hr />
           <ul>{this.renderExpenseList()}</ul>
         </div>
         <a
