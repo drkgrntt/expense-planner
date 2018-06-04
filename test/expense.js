@@ -38,7 +38,7 @@ describe('Expenses', () => {
   });
 
   // Test POST route
-  describe('/POST expenses', () => {
+  describe('/POST expense', () => {
     // Error test
     it('should not POST an expense if there is no title', done => {
       let expense = new Expense({
@@ -64,7 +64,7 @@ describe('Expenses', () => {
     });
 
     // Correct post test
-    it('should post an expense', done => {
+    it('should POST an expense', done => {
       let expense = new Expense({
         title: "Trip",
         total: 100,
@@ -167,7 +167,7 @@ describe('Expenses', () => {
   describe('/DELETE/:id expense', () => {
     it('should DELETE an expense given the id', done => {
       let expense = new Expense({
-        title: "Trip",
+        title: "Foodsies",
         total: 100,
         items: [{
           category: "Food",
@@ -183,10 +183,37 @@ describe('Expenses', () => {
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('message').eql('Expense successfully deleted');
-            res.body.deletedExpense.should.have.proprty('ok');eql(1);
-            res.body.deletedExpense.should.have.proprty('n').eql(1);
-          });
-        done();
+            res.body.deletedExpense.should.have.property('_id').eql(expense.id);
+          done();
+        });
+      });
+    });
+  });
+
+  // Test the /DELETE route for all expenses
+  describe('/DELETE expenses', () => {
+    it('should DELETE all expenses', done => {
+      let expense = new Expense({
+        title: "Trip",
+        total: 100,
+        items: [{
+          category: "Food",
+          cost: 100,
+          description: "Food for the trip"
+        }]
+      });
+
+      expense.save((err, expense) => {
+        chai.request(app)
+          .delete('/api/expenses')
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('All expenses successfully deleted');
+            res.body.deletedExpenses.should.have.property('ok').eql(1);
+            res.body.deletedExpenses.should.have.property('n').eql(1);
+          done();
+        });
       });
     });
   });

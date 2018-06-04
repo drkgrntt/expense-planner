@@ -21,7 +21,12 @@ module.exports = app => {
     const { title, description, total, expenses, dateRange } = req.body;
     const vacation = new Vacation({ title, description, total, expenses, dateRange });
 
-    vacation.save();
-    res.send(vacation);
+    vacation.save((err, vacation) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      return res.send({ message: "Vacation successfully created", vacation });
+    });
   });
 };

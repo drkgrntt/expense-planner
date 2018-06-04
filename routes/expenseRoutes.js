@@ -44,15 +44,15 @@ module.exports = app => {
 
   // DELETE EXPENSE ROUTE
   app.delete('/api/expenses/:id', async (req, res) => {
-    const deleteExpense = await Expense.findByIdAndRemove(req.params.id);
-
-    res.send({ message: "Expense successfully deleted", deleteExpense });
+    const deletedExpense = await Expense.findByIdAndRemove(req.params.id);
+    
+    res.send({ message: 'Expense successfully deleted', deletedExpense });
   });
 
   // DELETE ALL EXPENSES AFTER VACATION IS FINALIZED
   app.delete('/api/expenses', async (req, res) => {
-    const deleteExpenses = await Expense.find().remove();
+    const deletedExpenses = await Expense.find().remove();
 
-    res.send(deleteExpenses);
+    res.send({ message: 'All expenses successfully deleted', deletedExpenses });
   });
 };

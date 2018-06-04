@@ -7,6 +7,7 @@ const vacationSchema = new Schema({
   total: { type: Number, required: true },
   expenses: { type: [
     {
+      title: { type: String, required: true },
       total: { type: Number, required: true },
       items: { type: [
         {
