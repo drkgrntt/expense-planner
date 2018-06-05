@@ -48,7 +48,6 @@ class Header extends Component {
               New Expense
             </Link></li>
             <li className="divider" tabIndex="-1"></li>
-            <li><Link to="/">Home</Link></li>
           </ul>
         </div>
       );
@@ -65,7 +64,6 @@ class Header extends Component {
         >
           New Expense
         </Link>
-        <Link to="/" className="header-item">Home</Link>
       </div>
     );
   }
@@ -73,8 +71,10 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <h1 className="header-title">Vacation Expense Planner</h1>
-        {this.renderMenu()}
+          <div className="container">
+          <Link to="/" className="header-title">Plany</Link>
+          {this.renderMenu()}
+        </div>
       </div>
     );
   }
