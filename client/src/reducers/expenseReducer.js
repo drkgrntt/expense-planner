@@ -5,6 +5,7 @@ import {
   CREATE_ITEM,
   UPDATE_EXPENSE,
   UNFETCH_EXPENSE,
+  SUBMIT_EXPENSE_FAIL,
   SUBMIT_ITEM_FAIL,
   DELETE_ITEM,
   UPDATE_ITEM,
@@ -16,7 +17,8 @@ const INITIAL_STATE = {
   items: [], 
   title: '',
   total: 0, 
-  itemError: '', 
+  itemError: '',
+  expenseError: '',
   expenseList: {},
   selectedItem: {}
 };
@@ -45,10 +47,14 @@ export default (state = INITIAL_STATE, action) => {
         items: [],
         total: 0,
         title: '',
+        expenseError: '',
         itemError: '',
         expenseList: {},
         selectedItem: {}
       };
+    case SUBMIT_EXPENSE_FAIL:
+      return { ...state, expenseError: 'Please be sure to have an expense name and at least 1 item.' };
+
 
     // ITEMS ARE IN THE EXPENSE REDUCER SINCE THEY ARE
     // EXCLUSIVELY STATE PIECES OF EXPENSES AND

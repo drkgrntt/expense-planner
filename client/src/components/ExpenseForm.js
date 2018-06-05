@@ -7,17 +7,22 @@ import {
   createExpense, 
   updateExpense,
   deleteItem,
-  fetchItem
+  fetchItem,
+  submitExpenseFail
 } from '../actions';
 
 class ExpenseForm extends Component {
   // HANDLE SUBMIT
   onSubmit(value) {
-    const { createExpense, updateExpense, history, expense } = this.props;
+    const { submitExpenseFail, createExpense, updateExpense, history, expense } = this.props;
     const values = {
       title: value.title,
       total: expense.total,
       items: expense.items,
+    }
+
+    if (!values.title || !values.items) {
+      return submitExpenseFail();
     }
 
     if (expense.selectedId) {
@@ -91,12 +96,12 @@ class ExpenseForm extends Component {
   // RENDER EXPENSE FORM
   render() {
     const { handleSubmit, expense } = this.props;
-
     return (
       <form
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         className="card-panel form"
       >
+        <span className="error">{expense.expenseError}</span>
         <h5>Expense Name</h5>
         <Field
           name="title"
@@ -133,6 +138,7 @@ export default connect(
     createExpense, 
     updateExpense, 
     deleteItem, 
-    fetchItem
+    fetchItem,
+    submitExpenseFail
   }
-)(withRouter(formConfig))
+)(withRouter(formConfig));

@@ -10,12 +10,12 @@ import {
   FETCH_EXPENSE,
   UPDATE_EXPENSE,
   UNFETCH_EXPENSE,
+  SUBMIT_EXPENSE_FAIL,
 
   CREATE_ITEM,
   FETCH_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
-
   SUBMIT_ITEM_FAIL
 } from './types';
 
@@ -63,6 +63,10 @@ export const deleteExpense = id => async dispatch => {
 // GIVE A CLEAN FORM WHEN "NEW EXPENSE" IS CLICKED
 export const unfetchExpense = () => dispatch => {
   dispatch({ type: UNFETCH_EXPENSE });
+};
+
+export const submitExpenseFail = () => dispatch => {
+  dispatch({ type: SUBMIT_EXPENSE_FAIL });
 };
 
 // ============================

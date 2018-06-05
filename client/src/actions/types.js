@@ -8,10 +8,10 @@ export const FETCH_EXPENSE = 'fetch_expense';
 export const UPDATE_EXPENSE = 'update_expense';
 export const DELETE_EXPENSE = 'delete_expense';
 export const UNFETCH_EXPENSE = 'unfetch_expense';
+export const SUBMIT_EXPENSE_FAIL = 'submit_expense_fail';
 
 export const CREATE_ITEM = 'create_item';
 export const FETCH_ITEM = 'fetch_item';
 export const UPDATE_ITEM = 'update_item';
 export const DELETE_ITEM = 'delele_item';
-
 export const SUBMIT_ITEM_FAIL = 'submit_item_fail';
