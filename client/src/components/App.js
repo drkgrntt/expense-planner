@@ -8,8 +8,13 @@ import Landing from './Landing';
 import NewExpense from './NewExpense';
 import IndexVacations from './IndexVacations';
 import ShowVacation from './ShowVacation';
+import Authenticate from './Authenticate';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -17,6 +22,7 @@ class App extends Component {
           <Header />
           <div className="container routes">
             <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Authenticate} />
             <Route exact path="/expense" component={NewExpense} />
             <Route exact path="/vacations" component={IndexVacations} />
             <Route exact path="/vacations/:id" component={ShowVacation} />

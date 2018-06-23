@@ -3,7 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: rgb(240,240,240);
-  background-image: url('http://renatures.com/wp-content/uploads/2016/11/beaches-bora-island-vacation-isle-mountain-sun-sky-trees-beach-water-summer-sunshine-blue-sea-hill-ocean-clouds-paradise-palms-wallpaper-high-resolution-1920x1080.jpg');
+  background-image: url('https://i.imgur.com/3C2jZ3Z.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -135,6 +135,26 @@ a {
 }
 
 /* =================== */
+/*     AUTH STYLES     */
+/* =================== */
+
+.password-input {
+  flex-basis: 45%;
+}
+
+@media (max-width: 900px) {
+  .password-input {
+    flex-basis: 100%;
+  }
+}
+
+.flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* =================== */
 /*     MISC STYLES     */
 /* =================== */
 
@@ -161,6 +181,11 @@ a {
 
 .right {
   float: right;
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
 }
 
 .nospace {

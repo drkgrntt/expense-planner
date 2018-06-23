@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-import { unfetchExpense } from '../actions';
+import { unfetchExpense, logoutUser } from '../actions';
 
 class Header extends Component {
   constructor(props) {
@@ -30,6 +30,8 @@ class Header extends Component {
   }
 
   renderMenu() {
+    const { unfetchExpense, logoutUser, history } = this.props;
+
     // Dropdown menu for smaller screens
     if (this.state.retracted) {
       return (
@@ -43,7 +45,7 @@ class Header extends Component {
             <li className="divider" tabIndex="-1"></li>
             <li><Link
               to="/expense"
-              onClick={() => this.props.unfetchExpense()}
+              onClick={() => unfetchExpense()}
             >
               New Expense
             </Link></li>
@@ -60,24 +62,50 @@ class Header extends Component {
         <Link 
           to="/expense" 
           className="header-item"
-          onClick={() => this.props.unfetchExpense()}
+          onClick={() => unfetchExpense()}
         >
           New Expense
         </Link>
+        <a 
+          className="header-item" 
+          href="#" 
+          onClick={() => logoutUser(history)}
+        >
+          Logout
+        </a>
       </div>
     );
   }
 
+  renderLoggedOut() {
+    if (!this.props.user) {
+      return (
+        <div className="right">
+          <Link to="/login" className="header-item">
+            Login
+          </Link>
+        </div>
+      );
+    }
+
+    return this.renderMenu();
+  }
+
   render() {
+    console.log(this.props.user);
     return (
       <div className="header">
-          <div className="container">
+        <div className="container">
           <Link to="/" className="header-title">Plany</Link>
-          {this.renderMenu()}
+          {this.renderLoggedOut()}
         </div>
       </div>
     );
   }
 }
 
-export default connect(null, { unfetchExpense })(Header);
+const mapStateToProps = state => {
+  return { user: state.user.currentUser };
+};
+
+export default connect(mapStateToProps, { unfetchExpense, logoutUser })(withRouter(Header));

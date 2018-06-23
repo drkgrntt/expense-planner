@@ -43,6 +43,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, selectedId: '', items: [], total: 0, title: '' };
     case UNFETCH_EXPENSE:
       return {
+        ...state,
         selectedId: '',
         items: [],
         total: 0,

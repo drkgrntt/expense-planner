@@ -15,3 +15,10 @@ export const FETCH_ITEM = 'fetch_item';
 export const UPDATE_ITEM = 'update_item';
 export const DELETE_ITEM = 'delele_item';
 export const SUBMIT_ITEM_FAIL = 'submit_item_fail';
+
+export const LOGIN_USER = 'login_user';
+export const REGISTER_USER = 'register_user';
+export const LOGIN_USER_FAIL = 'login_user_fail';
+export const REGISTER_USER_FAIL = 'register_user_fail';
+export const FETCH_USER = 'fetch_user';
+export const LOGOUT_USER = 'logout_user';

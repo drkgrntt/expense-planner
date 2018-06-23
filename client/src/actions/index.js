@@ -16,7 +16,14 @@ import {
   FETCH_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
-  SUBMIT_ITEM_FAIL
+  SUBMIT_ITEM_FAIL,
+
+  LOGIN_USER,
+  REGISTER_USER,
+  LOGIN_USER_FAIL,
+  REGISTER_USER_FAIL,
+  FETCH_USER,
+  LOGOUT_USER
 } from './types';
 
 // ============================
@@ -173,4 +180,76 @@ export const createVacation = (expenses, history, { title, description }) => asy
   dispatch({ type: CREATE_VACATION, payload: res.data });
 
   await axios.delete('/api/expenses');
+};
+
+// ============================
+//         USER ACTIONS
+// ============================
+
+// CREATE A NEW USER
+export const registerUser = (values, history) => async dispatch => {
+  const { username, password, verify } = values;
+
+  const validateEmail = email => {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return regex.test(String(email).toLowerCase());
+  }
+  
+  // form validation
+  if (username === undefined || password === undefined) {
+    return dispatch(registerUserFail("Please complete all the fields."))
+  } else if (validateEmail(username) === false) {
+    return dispatch(registerUserFail("Please use correct email format (example@gmail.com)."));
+  } else if (password.length < 8) {
+    return dispatch(registerUserFail("Password must be at least 8 characters."));
+  } else if (password !== verify) {
+    return dispatch(registerUserFail("Passwords do not match."));
+  }
+
+  const res = await axios.post('/api/register', values);
+
+  if (res.data.message) {
+    return dispatch(registerUserFail("This email is already in use."));
+  }
+
+  history.push('/');
+  dispatch({ type: REGISTER_USER, payload: res.data });
+};
+
+// SENDS ERROR MESSAGE
+const registerUserFail = error => async dispatch => {
+  dispatch({ type: REGISTER_USER_FAIL, payload: error });
+};
+
+// LOGIN WITH EXISTING USER
+export const loginUser = (values, history) => async dispatch => {
+  const res = await axios.post('/api/login', values);
+
+  if (res.data.message) {
+    return dispatch(loginUserFail(res.data.message));
+  }
+
+  history.push('/');
+  dispatch({ type: LOGIN_USER, payload: res.data });
+};
+
+// RETURNS ERROR MESSAGE
+const loginUserFail = error => async dispatch => {
+  dispatch({ type: LOGIN_USER_FAIL, payload: error });
+};
+
+// FETCH CURRENT USER
+export const fetchUser = () => async dispatch => {
+  const res = await axios.get('/api/currentUser');
+
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+// LOGOUT
+export const logoutUser = history => async dispatch => {
+  const res = await axios.get('/api/logout');
+
+  history.push('/');
+  dispatch({ type: LOGOUT_USER, payload: res.data });
 };
