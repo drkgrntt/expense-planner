@@ -25,7 +25,6 @@ export default (state = INITIAL_STATE, action) => {
     case REGISTER_USER_FAIL:
       return { ...state, error: action.payload };
     case LOGOUT_USER:
-      console.log('logged out');
       return { currentUser: action.payload };
     default:
       return state;
