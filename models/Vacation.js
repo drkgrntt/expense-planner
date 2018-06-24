@@ -20,6 +20,16 @@ const vacationSchema = new Schema({
       dateString: String
     }
   ], required: true },
+  owner: {
+    type: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      email: String
+    },
+    required: true
+  },
   dateRange: String,
   created: { type: Date, default: Date.now }
 },

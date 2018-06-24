@@ -17,6 +17,16 @@ const expenseSchema = new Schema({
     ], 
     required: true 
   },
+  owner: {
+    type: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      email: String
+    },
+    required: true
+  },
   created: { type: Date, default: Date.now },
   dateString: { type: String, default: dateString }
 },

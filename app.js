@@ -29,16 +29,6 @@ app.use(
 // PASSPORT CONFIG
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.use(new LocalStrategy(
-//   (username, password, done) => {
-//     User.findOne({ username }, (err, user) => {
-//       if (err) { return done(err); }
-//       if (!user) { return done(null, false, { message: 'Invalid email or password' }); }
-//       if (!user.verifyPassword(password)) {return done(null, false); }
-//       return done(null, user);
-//     });
-//   }
-// ));
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

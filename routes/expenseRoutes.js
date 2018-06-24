@@ -3,7 +3,7 @@ const Expense = require('../models/Expense');
 module.exports = app => {
   // INDEX EXPENSE ROUTE
   app.get('/api/expenses', async (req, res) => {
-    const expenses = await Expense.find().sort({ created: -1 });
+    const expenses = await Expense.find({ 'owner.id': req.user._id }).sort({ created: -1 });
 
     res.send(expenses);
   });
@@ -18,7 +18,15 @@ module.exports = app => {
   // CREATE EXPENSE ROUTE
   app.post('/api/expenses', (req, res) => {
     const { title, total, items } = req.body;
-    const expense = new Expense({ title, total, items });
+    const expense = new Expense({
+      title,
+      total,
+      items,
+      owner: {
+        id: req.user._id,
+        email: req.user.email
+      }
+    });
 
     expense.save((err, expense) => {
       if (err) {

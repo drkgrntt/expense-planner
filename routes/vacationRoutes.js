@@ -1,10 +1,9 @@
 const Vacation = require('../models/Vacation');
-const Expense = require('../models/Expense');
 
 module.exports = app => {
   // INDEX EXPENSE VACATIONS ROUTE
   app.get('/api/vacations', async (req, res) => {
-    const vacations = await Vacation.find().sort({ created: -1 });
+    const vacations = await Vacation.find({ 'owner.id': req.user._id }).sort({ created: -1 });
 
     res.send(vacations);
   });
@@ -19,7 +18,17 @@ module.exports = app => {
   // CREATE A VACATION ROUTE
   app.post('/api/vacations', (req, res) => {
     const { title, description, total, expenses, dateRange } = req.body;
-    const vacation = new Vacation({ title, description, total, expenses, dateRange });
+    const vacation = new Vacation({ 
+      title, 
+      description, 
+      total, 
+      expenses, 
+      dateRange,
+      owner: {
+        id: req.user._id,
+        email: req.user.email
+      }
+    });
 
     vacation.save((err, vacation) => {
       if (err) {
