@@ -12,7 +12,9 @@ class Landing extends Component {
     return (
       <div className="card-panel list">
         <h2>Welcome to Plany!</h2>
-        <h5>Your vacation expense planner</h5>
+        <h5 style={{ margin: '0 30px' }}>Your vacation expense planner</h5>
+        <hr />
+        <img className="preview-image" src="https://i.imgur.com/Yjkvdsn.png?1" />
         <hr />
         <Link className="btn" to="/login">Get started</Link>
       </div>

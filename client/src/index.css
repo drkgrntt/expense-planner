@@ -158,6 +158,29 @@ a {
 /*     MISC STYLES     */
 /* =================== */
 
+.preview-image {
+  max-width: 90%;
+  max-height: 400px;
+  display: block;
+  margin: 30px auto;
+  border-radius: 10px;
+  box-shadow: 0px 5px 7px rgba(0,0,0,0.5);
+  transition: -webkit-box-shadow .25s;
+  transition: box-shadow .25s;
+  transition: box-shadow .25s, -webkit-box-shadow .25s;
+}
+
+@media (max-width: 600px) {
+  .preview-image {
+    max-width: 97%;
+  }
+}
+
+.preview-image:hover {
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
+
 .vacation {
   border: 1px solid rgb(130,130,130);
   border-radius: 5px;
