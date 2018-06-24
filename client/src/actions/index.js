@@ -81,8 +81,18 @@ export const submitExpenseFail = () => dispatch => {
 // ============================
 
 // CREATE ITEMS FOR EXPENSES
-export const createItem = values => dispatch => {
-  dispatch({ type: CREATE_ITEM, payload: values });
+export const createItem = ({ category, cost, description }) => dispatch => {
+  const makeid = () => {
+    return Math.floor(Math.random() * 1000000000).toString();
+  };
+  const newItem = {
+    category,
+    cost,
+    description,
+    _id: makeid()
+  };
+
+  dispatch({ type: CREATE_ITEM, payload: newItem });
 };
 
 // FETCH ONE EXPENSE ITEM
@@ -100,7 +110,7 @@ export const updateItem = (items, id, { category, cost, description }) => dispat
   };
   let newItems = {
     items: [],
-    total: 0,
+    total: 0
   };
 
   _.map(items, item => {

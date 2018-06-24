@@ -96,6 +96,7 @@ class ExpenseForm extends Component {
   // RENDER EXPENSE FORM
   render() {
     const { handleSubmit, expense } = this.props;
+
     return (
       <form
         onSubmit={handleSubmit(this.onSubmit.bind(this))}

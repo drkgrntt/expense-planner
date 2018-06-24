@@ -12,7 +12,8 @@ const expenseSchema = new Schema({
       {
         category: { type: String, required: true },
         cost: { type: Number, required: true },
-        description: String
+        description: String,
+        _id: { type: String, required: true }
       }
     ], 
     required: true 
