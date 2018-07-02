@@ -3,6 +3,7 @@ export const FETCH_VACATIONS = 'fetch_vacations';
 export const FETCH_VACATION = 'fetch_vacation';
 
 export const FETCH_EXPENSES = 'fetch_expenses';
+export const SET_TITLE_TEXT = 'set_title_text';
 export const CREATE_EXPENSE = 'create_expense';
 export const FETCH_EXPENSE = 'fetch_expense';
 export const UPDATE_EXPENSE = 'update_expense';

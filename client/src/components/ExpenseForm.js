@@ -8,7 +8,8 @@ import {
   updateExpense,
   deleteItem,
   fetchItem,
-  submitExpenseFail
+  submitExpenseFail,
+  setTitleText
 } from '../actions';
 
 class ExpenseForm extends Component {
@@ -95,7 +96,8 @@ class ExpenseForm extends Component {
 
   // RENDER EXPENSE FORM
   render() {
-    const { handleSubmit, expense } = this.props;
+    const { handleSubmit, expense, setTitleText } = this.props;
+    console.log(expense);
 
     return (
       <form
@@ -109,6 +111,7 @@ class ExpenseForm extends Component {
           component="input"
           type="text"
           placeholder="Hotel for the trip"
+          onChange={event => setTitleText(event.target.value)}
         />        
         {this.renderItemizations()}
         <h5>Total Cost</h5>
@@ -140,6 +143,7 @@ export default connect(
     updateExpense, 
     deleteItem, 
     fetchItem,
-    submitExpenseFail
+    submitExpenseFail,
+    setTitleText
   }
 )(withRouter(formConfig));

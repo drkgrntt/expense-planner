@@ -2,6 +2,7 @@ import {
   FETCH_EXPENSES,
   FETCH_EXPENSE,
   CREATE_EXPENSE,
+  SET_TITLE_TEXT,
   CREATE_ITEM,
   UPDATE_EXPENSE,
   UNFETCH_EXPENSE,
@@ -28,6 +29,8 @@ export default (state = INITIAL_STATE, action) => {
     case CREATE_EXPENSE:
       // reset title, item array, and total
       return { ...state, items: [], total: 0, title: '' };
+    case SET_TITLE_TEXT:
+      return { ...state, title: action.payload };
     case FETCH_EXPENSES:
       return { ...state, expenseList: action.payload };
     case FETCH_EXPENSE:

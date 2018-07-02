@@ -7,6 +7,7 @@ import {
 
   CREATE_EXPENSE,
   FETCH_EXPENSES,
+  SET_TITLE_TEXT,
   FETCH_EXPENSE,
   UPDATE_EXPENSE,
   UNFETCH_EXPENSE,
@@ -37,6 +38,14 @@ export const createExpense = (values, history) => async dispatch => {
   history.push('/');
   dispatch({ type: CREATE_EXPENSE, payload: res.data });
 };
+
+// MAKE SURE TITLE TEXT IS SET
+export const setTitleText = text => {
+  return {
+    type: SET_TITLE_TEXT,
+    payload: text
+  }
+}
 
 // FETCH ALL EXPENSES
 export const fetchExpenses = () => async dispatch => {
